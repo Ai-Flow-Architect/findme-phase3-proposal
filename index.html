@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FindMe!! Phase3 追加開発ご提案｜（株）RobinHoodCompany 加藤様</title>
+<style>
+  :root {
+    --primary: #1e40af;
+    --primary-light: #3b82f6;
+    --accent: #06b6d4;
+    --accent2: #10b981;
+    --warm: #f59e0b;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 55%, #06b6d4 100%);
+    color: #fff;
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 4px 18px; font-size: 13px; letter-spacing: 2px; margin-bottom: 20px; }
+  .hero h1 { font-size: 30px; font-weight: 800; margin-bottom: 14px; line-height: 1.4; }
+  .hero p { font-size: 16px; opacity: 0.92; max-width: 720px; margin: 0 auto; }
+  .hero-client { margin-top: 28px; font-size: 15px; opacity: 0.85; }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 44px 0 4px; }
+  .section-title { font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 8px; padding-left: 14px; border-left: 5px solid var(--accent); }
+  .section-sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; padding-left: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 12px; padding: 18px 14px; text-align: center; }
+  .stat .label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .stat .val { font-size: 16px; font-weight: 800; color: var(--text); }
+
+  table.feat { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  table.feat th { background: var(--primary); color: #fff; padding: 12px 10px; font-size: 13px; text-align: left; }
+  table.feat td { padding: 12px 10px; border-top: 1px solid var(--border); font-size: 14px; vertical-align: top; }
+  table.feat tr:nth-child(even) td { background: #fbfdff; }
+  .num { font-weight: 800; color: var(--primary-light); }
+  .badge { display: inline-block; border-radius: 6px; padding: 2px 10px; font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; }
+  .b-high { background: #dc2626; }
+  .b-mid { background: var(--warm); }
+  .b-opt { background: #94a3b8; }
+  .b-rec { background: var(--accent2); }
+
+  .price-box { background: linear-gradient(135deg, #1e40af, #06b6d4); color: #fff; border-radius: 18px; padding: 32px 24px; text-align: center; margin: 22px 0; }
+  .price-box .ttl { font-size: 14px; opacity: 0.9; }
+  .price-box .amt { font-size: 34px; font-weight: 900; margin: 8px 0; }
+  .price-box .note { font-size: 13px; opacity: 0.85; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0; }
+  .pcard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .pcard h3 { font-size: 15px; color: var(--primary); margin-bottom: 8px; }
+  .pcard .p { font-size: 18px; font-weight: 800; }
+  .pcard .d { font-size: 13px; color: var(--muted); }
+
+  .steps { counter-reset: s; margin: 20px 0; }
+  .step { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px dashed var(--border); }
+  .step .n { counter-increment: s; background: var(--primary); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+  .step .n::before { content: counter(s); }
+  .step .b h4 { font-size: 15px; }
+  .step .b p { font-size: 13px; color: var(--muted); }
+
+  .guarantee { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0 40px; }
+  .gitem { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent2); border-radius: 12px; padding: 16px 18px; }
+  .gitem h4 { font-size: 14px; margin-bottom: 4px; color: var(--primary); }
+  .gitem p { font-size: 13px; color: var(--muted); }
+
+  .done-banner { background: #ecfdf5; border: 1px solid #6ee7b7; border-left: 5px solid var(--accent2); border-radius: 12px; padding: 18px 20px; margin: 20px 0; }
+  .done-banner h3 { color: #047857; font-size: 15px; margin-bottom: 8px; }
+  .done-banner p { font-size: 13px; color: #065f46; }
+
+  .mvp-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: #1e3a8a; }
+  .mvp-note b { color: var(--primary); }
+
+  footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 28px 20px; font-size: 13px; }
+  @media (max-width: 640px) { .stats { grid-template-columns: repeat(2,1fr); } .cards, .guarantee { grid-template-columns: 1fr; } .hero h1 { font-size: 24px; } }
+
+  /* 印刷・PDF用: ページ境界での見切れ防止（複数ページ対応） */
+  @page { size: A4; margin: 12mm 10mm; }
+  @media print {
+    body { background: #fff; }
+    .hero { padding: 40px 24px 36px; }
+    /* ブロックの途中でページを割らせない */
+    .section, .stat, .pcard, .gitem, .step, .price-box, .done-banner, .mvp-note { break-inside: avoid; page-break-inside: avoid; }
+    table.feat { break-inside: auto; }
+    table.feat tr, table.feat td, table.feat th { break-inside: avoid; page-break-inside: avoid; }
+    table.feat thead { display: table-header-group; }
+    .section-title { break-after: avoid; page-break-after: avoid; }
+    h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-tag">PHASE 3 PROPOSAL</div>
+    <h1>FindMe!! Phase3 追加開発ご提案<br>「使われ続け、収益が伸びる」サービスへ</h1>
+    <p>Phase2で8機能を本番リリースし、GCPへの移行・独自ドメイン・SSL・セキュリティ強化まで完了しました。Phase3では、運用を軽くし、ユーザーの定着と収益化を加速させる機能をご提案します。</p>
+    <div class="hero-client">（株）RobinHoodCompany 松原様・加藤様　／　2026年6月 ご提案　／　AIフローアーキテクト</div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="section">
+      <div class="done-banner">
+        <h3>Phase2 完了実績（2026年6月 本番稼働）</h3>
+        <p>(1)エリア絞込 (2)メール通知 (3)管理ダッシュボード (4)履歴書アップロード (5)Google/LINEログイン (6)AIレコメンド (7)求人票作成 (8)マッチングスコア の全8機能を本番実装。あわせて Render から GCP（Cloud Run + Cloud SQL）への移行、独自ドメイン findme-work.com・SSL化、セキュリティ強化（CORS・各種セキュリティヘッダ）まで完了しています。</p>
+      </div>
+      <div class="mvp-note">
+        <b>MVP動作保証：</b>企業・求職者の双方が、登録 → プロフィール作成 → 検索／公開 → オファー → 返答 → メッセージのやり取り、までを一通り不足なく操作できる状態を本番で確認済みです。Phase3はこの完成したMVPの上に積み上げます。
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">現在の基盤</div>
+      <div class="section-sub">Phase3はこの本番基盤の上に積み上げます。</div>
+      <div class="stats">
+        <div class="stat"><div class="label">インフラ</div><div class="val">GCP Cloud Run</div></div>
+        <div class="stat"><div class="label">ログイン</div><div class="val">Google / LINE</div></div>
+        <div class="stat"><div class="label">通知</div><div class="val">メール稼働中</div></div>
+        <div class="stat"><div class="label">課金</div><div class="val">Stripeチケット</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Phase3 追加機能リスト</div>
+      <div class="section-sub">優先順位はご相談のうえ確定し、実施範囲で正式見積を発行します。</div>
+      <table class="feat">
+        <tr><th style="width:34px;">#</th><th>機能名</th><th>概要</th><th style="width:92px;">優先度</th></tr>
+        <tr><td class="num">1</td><td>通知の高度化<br>（リマインド／ダイジェスト）</td><td>未読オファーのリマインド、新着求職者の週次ダイジェストメール、LINE通知の併用。開封・再訪を増やしマッチング率を底上げ。</td><td><span class="badge b-high">高</span></td></tr>
+        <tr><td class="num">2</td><td>保存条件・新着アラート</td><td>企業が検索条件を保存し、条件に合う求職者が新規登録されたら自動通知。「探しに来なくても候補が届く」体験へ。</td><td><span class="badge b-high">高</span></td></tr>
+        <tr><td class="num">3</td><td>ダッシュボード拡張<br>＋CSV出力</td><td>登録推移・オファー成約率・チケット消化のグラフ追加とCSV／Excelエクスポート。事業会議・レポートにそのまま使える。</td><td><span class="badge b-mid">中</span></td></tr>
+        <tr><td class="num">4</td><td>課金プランの拡充</td><td>チケットまとめ買い割引、月額サブスク（使い放題プラン）の導入。LTV向上と収益の安定化。</td><td><span class="badge b-mid">中</span></td></tr>
+        <tr><td class="num">5</td><td>マッチングスコアの<br>精度向上</td><td>行動データ（閲覧・オファー履歴）を加味したスコア改善と、求職者側にも「相性の良い企業」を表示。両面マッチングへ。</td><td><span class="badge b-mid">中</span></td></tr>
+        <tr><td class="num">6</td><td>スカウトテンプレート<br>＆一斉オファー</td><td>定型スカウト文の保存、複数候補への一括オファー。企業の運用工数を大幅削減。</td><td><span class="badge b-opt">要相談</span></td></tr>
+        <tr><td class="num">7</td><td>管理者向け<br>運用機能強化</td><td>不正・スパム対策、通報対応、ユーザー一括管理。サービス拡大に耐える運営体制へ。</td><td><span class="badge b-opt">要相談</span></td></tr>
+        <tr><td class="num">8</td><td>運用保守プラン<br>（月額）</td><td>障害監視・セキュリティ更新・軽微な改修・GCP費用最適化を月額でカバー。安心して伸ばせる体制を継続提供。</td><td><span class="badge b-rec">推奨</span></td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Phase3 開発 概算</div>
+      <div class="section-sub">実施機能により変動します。ヒヤリング後に正式見積書を発行します。</div>
+      <div class="price-box">
+        <div class="ttl">Phase3 追加開発（実施機能により変動）</div>
+        <div class="amt">¥220,000 〜 ¥420,000</div>
+        <div class="note">＋ 運用保守プラン（任意）月額 ¥19,800 〜</div>
+      </div>
+      <div class="cards">
+        <div class="pcard"><h3>開発費（例：¥280,000の場合）</h3><div class="p">着手金 50% ／ 残金 50%</div><div class="d">契約時に着手金、納品・動作確認後に残金。Phase2と同条件です。</div></div>
+        <div class="pcard"><h3>運用保守（任意・月額）</h3><div class="p">¥19,800 〜 ／ 月</div><div class="d">監視・セキュリティ更新・軽微改修・GCP費用最適化を継続。いつでも開始・停止可。</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">進め方</div>
+      <div class="steps">
+        <div class="step"><div class="n"></div><div class="b"><h4>ヒヤリング — 優先機能の確定</h4><p>使われ方・伸ばしたい指標をうかがい、Phase3の実施範囲と予算を確定します。</p></div></div>
+        <div class="step"><div class="n"></div><div class="b"><h4>正式見積・契約</h4><p>確定スコープで正式見積書を発行。着手金確認後に開発開始。</p></div></div>
+        <div class="step"><div class="n"></div><div class="b"><h4>開発 — 週次進捗報告</h4><p>完了機能から順次、本番（findme-work.com）でご確認いただけます。</p></div></div>
+        <div class="step"><div class="n"></div><div class="b"><h4>納品・本番反映</h4><p>テスト・動作確認後に本番反映。残金お支払い後に完了。希望に応じ保守へ移行。</p></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">安心の開発体制</div>
+      <div class="guarantee">
+        <div class="gitem"><h4>納品後30日 無償修正</h4><p>納品後の不具合は追加費用なしで対応します。</p></div>
+        <div class="gitem"><h4>週次進捗報告</h4><p>毎週の報告で方向のズレを防ぎます。</p></div>
+        <div class="gitem"><h4>基盤を熟知した高速開発</h4><p>Phase1・2を担当した同チームが、新規より速く実装します。</p></div>
+        <div class="gitem"><h4>セキュリティ継続対応</h4><p>移行・脆弱性対策の実績をもとに、安全な運用を継続します。</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    AIフローアーキテクト　｜　FindMe!! Phase3 追加開発ご提案<br>
+    ご不明点はお気軽にお申し付けください。
+  </footer>
+</body>
+</html>

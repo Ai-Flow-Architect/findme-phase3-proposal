@@ -11,106 +11,200 @@
     --accent: #06b6d4;
     --accent2: #10b981;
     --warm: #f59e0b;
-    --bg: #f8fafc;
+    --bg: #f4f7fb;
     --card: #ffffff;
     --text: #0f172a;
     --muted: #64748b;
-    --border: #e2e8f0;
+    --border: #e6edf5;
+    --shadow: 0 6px 24px -8px rgba(15,23,42,0.14);
+    --shadow-lg: 0 18px 48px -16px rgba(30,64,175,0.28);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-
-  .hero {
-    background: linear-gradient(135deg, #0f172a 0%, #1e40af 55%, #06b6d4 100%);
-    color: #fff;
-    padding: 64px 24px 56px;
-    text-align: center;
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 4px 18px; font-size: 13px; letter-spacing: 2px; margin-bottom: 20px; }
-  .hero h1 { font-size: 30px; font-weight: 800; margin-bottom: 14px; line-height: 1.4; }
-  .hero p { font-size: 16px; opacity: 0.92; max-width: 720px; margin: 0 auto; }
-  .hero-client { margin-top: 28px; font-size: 15px; opacity: 0.85; }
 
-  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
-  .section { padding: 44px 0 4px; }
-  .section-title { font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 8px; padding-left: 14px; border-left: 5px solid var(--accent); }
-  .section-sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; padding-left: 14px; }
+  /* ===== HERO ===== */
+  .hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #0b1220 0%, #1e3a8a 52%, #0e7490 100%);
+    color: #fff; padding: 84px 24px 96px; text-align: center;
+  }
+  .hero::before, .hero::after {
+    content: ""; position: absolute; border-radius: 50%; filter: blur(8px); opacity: 0.5;
+    background: radial-gradient(circle at center, rgba(6,182,212,0.7), transparent 70%);
+    animation: float 9s ease-in-out infinite;
+  }
+  .hero::before { width: 340px; height: 340px; top: -120px; right: -80px; }
+  .hero::after { width: 300px; height: 300px; bottom: -140px; left: -70px; background: radial-gradient(circle at center, rgba(59,130,246,0.6), transparent 70%); animation-delay: -4s; }
+  @keyframes float { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-22px) scale(1.06); } }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 30px; padding: 6px 22px; font-size: 12px; letter-spacing: 4px; margin-bottom: 24px;
+    backdrop-filter: blur(4px); font-weight: 700; color: #f0f9ff;
+  }
+  .hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 18px; line-height: 1.45; letter-spacing: 0.5px; }
+  .hero h1 .grad { background: linear-gradient(90deg,#7dd3fc,#a7f3d0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 16px; opacity: 0.94; max-width: 700px; margin: 0 auto; }
+  .hero-client { margin-top: 30px; font-size: 14px; color: #e2eefb; opacity: 0.95; letter-spacing: 0.5px; }
+  .hero-wave { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 1; line-height: 0; }
+  .hero-wave svg { width: 100%; height: 56px; display: block; }
 
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0; }
-  .stat { background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 12px; padding: 18px 14px; text-align: center; }
-  .stat .label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-  .stat .val { font-size: 16px; font-weight: 800; color: var(--text); }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
 
-  table.feat { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-  table.feat th { background: var(--primary); color: #fff; padding: 12px 10px; font-size: 13px; text-align: left; }
-  table.feat td { padding: 12px 10px; border-top: 1px solid var(--border); font-size: 14px; vertical-align: top; }
-  table.feat tr:nth-child(even) td { background: #fbfdff; }
-  .num { font-weight: 800; color: var(--primary-light); }
-  .badge { display: inline-block; border-radius: 6px; padding: 2px 10px; font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; }
-  .b-high { background: #dc2626; }
-  .b-mid { background: var(--warm); }
-  .b-opt { background: #94a3b8; }
-  .b-rec { background: var(--accent2); }
+  /* ===== SECTION ===== */
+  .section { padding: 52px 0 8px; }
+  .section-title { font-size: 23px; font-weight: 900; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+  .section-title .ic {
+    width: 38px; height: 38px; flex-shrink: 0; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 19px; background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 6px 16px -6px rgba(6,182,212,0.6);
+  }
+  .section-sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; padding-left: 50px; }
 
-  .price-box { background: linear-gradient(135deg, #1e40af, #06b6d4); color: #fff; border-radius: 18px; padding: 32px 24px; text-align: center; margin: 22px 0; }
-  .price-box .ttl { font-size: 14px; opacity: 0.9; }
-  .price-box .amt { font-size: 34px; font-weight: 900; margin: 8px 0; }
-  .price-box .note { font-size: 13px; opacity: 0.85; }
+  /* ===== reveal animation ===== */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
 
-  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0; }
-  .pcard { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .pcard h3 { font-size: 15px; color: var(--primary); margin-bottom: 8px; }
-  .pcard .p { font-size: 18px; font-weight: 800; }
-  .pcard .d { font-size: 13px; color: var(--muted); }
+  /* ===== DONE BANNER ===== */
+  .done-banner {
+    position: relative; background: linear-gradient(135deg,#ecfdf5,#f0fdfa); border: 1px solid #a7f3d0;
+    border-radius: 16px; padding: 22px 24px 22px 26px; margin: 22px 0; box-shadow: var(--shadow);
+  }
+  .done-banner::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 5px; border-radius: 6px; background: linear-gradient(var(--accent2),#059669); }
+  .done-banner h3 { color: #047857; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .done-banner h3::before { content: "✅"; font-size: 16px; }
+  .done-banner p { font-size: 13.5px; color: #065f46; }
 
-  .steps { counter-reset: s; margin: 20px 0; }
-  .step { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px dashed var(--border); }
-  .step .n { counter-increment: s; background: var(--primary); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
-  .step .n::before { content: counter(s); }
-  .step .b h4 { font-size: 15px; }
-  .step .b p { font-size: 13px; color: var(--muted); }
-
-  .guarantee { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0 40px; }
-  .gitem { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent2); border-radius: 12px; padding: 16px 18px; }
-  .gitem h4 { font-size: 14px; margin-bottom: 4px; color: var(--primary); }
-  .gitem p { font-size: 13px; color: var(--muted); }
-
-  .done-banner { background: #ecfdf5; border: 1px solid #6ee7b7; border-left: 5px solid var(--accent2); border-radius: 12px; padding: 18px 20px; margin: 20px 0; }
-  .done-banner h3 { color: #047857; font-size: 15px; margin-bottom: 8px; }
-  .done-banner p { font-size: 13px; color: #065f46; }
-
-  .mvp-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: #1e3a8a; }
+  .mvp-note { background: linear-gradient(135deg,#eff6ff,#f5f9ff); border: 1px solid #bfdbfe; border-radius: 14px; padding: 18px 22px; margin: 16px 0; font-size: 13.5px; color: #1e3a8a; box-shadow: var(--shadow); }
   .mvp-note b { color: var(--primary); }
 
-  footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 28px 20px; font-size: 13px; }
-  @media (max-width: 640px) { .stats { grid-template-columns: repeat(2,1fr); } .cards, .guarantee { grid-template-columns: 1fr; } .hero h1 { font-size: 24px; } }
+  /* ===== STATS ===== */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 22px 0; }
+  .stat {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 14px 20px;
+    text-align: center; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .stat:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+  .stat .emo { font-size: 24px; display: block; margin-bottom: 8px; }
+  .stat .label { font-size: 11.5px; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.5px; }
+  .stat .val { font-size: 15.5px; font-weight: 800; color: var(--text); }
 
-  /* 印刷・PDF用: ページ境界での見切れ防止（複数ページ対応） */
+  /* ===== FEATURE CARDS ===== */
+  .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 22px 0; }
+  .fcard {
+    position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px 20px 18px 20px; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    overflow: hidden;
+  }
+  .fcard::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(var(--primary),var(--accent)); opacity: 0; transition: opacity .25s ease; }
+  .fcard:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: #c7dbf5; }
+  .fcard:hover::before { opacity: 1; }
+  .fcard .head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .fcard .n {
+    width: 36px; height: 36px; flex-shrink: 0; border-radius: 11px; display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 900; color: #fff; background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  }
+  .fcard h3 { font-size: 15px; color: var(--text); font-weight: 800; line-height: 1.4; flex: 1; }
+  .fcard .desc { font-size: 13px; color: #475569; line-height: 1.78; }
+  .fcard .badge { position: absolute; top: 16px; right: 16px; }
+  .badge { display: inline-block; border-radius: 20px; padding: 3px 12px; font-size: 11.5px; font-weight: 800; color: #fff; white-space: nowrap; letter-spacing: 0.5px; }
+  .b-high { background: linear-gradient(135deg,#ef4444,#dc2626); }
+  .b-mid { background: linear-gradient(135deg,#fbbf24,#f59e0b); }
+  .b-opt { background: linear-gradient(135deg,#a8b3c4,#94a3b8); }
+  .b-rec { background: linear-gradient(135deg,#34d399,#10b981); }
+
+  /* ===== PRICE ===== */
+  .price-box {
+    position: relative; overflow: hidden; background: linear-gradient(135deg, #1e3a8a, #0891b2); color: #fff;
+    border-radius: 22px; padding: 38px 24px; text-align: center; margin: 22px 0; box-shadow: var(--shadow-lg);
+  }
+  .price-box::after { content: ""; position: absolute; top: -50%; left: -60%; width: 70%; height: 200%; transform: rotate(20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent); animation: shimmer 7s ease-in-out infinite; }
+  @keyframes shimmer { 0%,100% { left: -60%; } 50% { left: 120%; } }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .hero::after, .price-box::after { animation: none; } .reveal { opacity: 1; transform: none; } }
+  .price-box .ttl { font-size: 14px; opacity: 0.92; position: relative; }
+  .price-box .amt { font-size: 38px; font-weight: 900; margin: 10px 0; letter-spacing: 0.5px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .price-box .note { font-size: 13.5px; opacity: 0.88; position: relative; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 18px 0; }
+  .pcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease; }
+  .pcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .pcard h3 { font-size: 14px; color: var(--primary); margin-bottom: 8px; font-weight: 800; }
+  .pcard .p { font-size: 19px; font-weight: 900; margin-bottom: 4px; }
+  .pcard .d { font-size: 13px; color: var(--muted); }
+
+  /* ===== STEPS ===== */
+  .steps { counter-reset: s; margin: 20px 0; position: relative; }
+  .steps::before { content: ""; position: absolute; left: 18px; top: 28px; bottom: 28px; width: 2px; background: linear-gradient(var(--primary-light),var(--accent)); opacity: 0.35; }
+  .step { display: flex; gap: 18px; padding: 16px 0; align-items: flex-start; position: relative; }
+  .step .n {
+    counter-increment: s; background: linear-gradient(135deg,var(--primary),var(--accent)); color: #fff; width: 38px; height: 38px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; flex-shrink: 0; z-index: 1;
+    box-shadow: 0 6px 16px -6px rgba(30,64,175,0.6); font-size: 15px;
+  }
+  .step .n::before { content: counter(s); }
+  .step .b { padding-top: 4px; }
+  .step .b h4 { font-size: 15.5px; font-weight: 800; margin-bottom: 3px; }
+  .step .b p { font-size: 13px; color: var(--muted); }
+
+  /* ===== GUARANTEE ===== */
+  .guarantee { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 18px 0 44px; }
+  .gitem { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease; display: flex; gap: 14px; align-items: flex-start; }
+  .gitem:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .gitem .gic { width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: linear-gradient(135deg,#d1fae5,#a7f3d0); }
+  .gitem h4 { font-size: 14px; margin-bottom: 4px; color: var(--primary); font-weight: 800; }
+  .gitem p { font-size: 12.5px; color: var(--muted); }
+
+  /* ===== CTA ===== */
+  .cta { text-align: center; margin: 8px 0 48px; }
+  .cta p { font-size: 15px; color: var(--text); margin-bottom: 18px; font-weight: 700; }
+  .cta a { display: inline-block; background: linear-gradient(135deg,#2563eb,#06b6d4 70%,#10b981); color: #fff; text-decoration: none; font-weight: 800; font-size: 16.5px; padding: 17px 46px; border-radius: 40px; box-shadow: 0 14px 34px -10px rgba(6,182,212,0.6); transition: transform .2s ease, box-shadow .2s ease; }
+  .cta a:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 20px 44px -12px rgba(6,182,212,0.7); }
+
+  footer { background: linear-gradient(135deg,#0b1220,#1e293b); color: #cbd5e1; text-align: center; padding: 34px 20px; font-size: 13px; line-height: 1.9; }
+  footer b { color: #7dd3fc; }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2,1fr); }
+    .cards, .guarantee, .feat-grid { grid-template-columns: 1fr; }
+    .hero { padding: 64px 20px 76px; }
+    .hero h1 { font-size: 25px; }
+    .section-title { font-size: 20px; }
+    .section-sub { padding-left: 0; }
+    .fcard .badge { position: static; display: inline-block; margin-top: 4px; }
+  }
+
+  /* 印刷・PDF用: ページ境界での見切れ防止 */
   @page { size: A4; margin: 12mm 10mm; }
   @media print {
+    html { scroll-behavior: auto; }
     body { background: #fff; }
     .hero { padding: 40px 24px 36px; }
-    /* ブロックの途中でページを割らせない */
-    .section, .stat, .pcard, .gitem, .step, .price-box, .done-banner, .mvp-note { break-inside: avoid; page-break-inside: avoid; }
-    table.feat { break-inside: auto; }
-    table.feat tr, table.feat td, table.feat th { break-inside: avoid; page-break-inside: avoid; }
-    table.feat thead { display: table-header-group; }
+    .hero::before, .hero::after, .price-box::after { display: none; animation: none; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .section, .stat, .fcard, .pcard, .gitem, .step, .price-box, .done-banner, .mvp-note { break-inside: avoid; page-break-inside: avoid; }
     .section-title { break-after: avoid; page-break-after: avoid; }
     h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+    .stat:hover, .fcard:hover, .pcard:hover, .gitem:hover { transform: none; box-shadow: var(--shadow); }
   }
 </style>
 </head>
 <body>
   <div class="hero">
     <div class="hero-tag">PHASE 3 PROPOSAL</div>
-    <h1>FindMe!! Phase3 追加開発ご提案<br>「使われ続け、収益が伸びる」サービスへ</h1>
+    <h1>FindMe!! Phase3 追加開発ご提案<br><span class="grad">「使われ続け、収益が伸びる」サービスへ</span></h1>
     <p>Phase2で8機能を本番リリースし、GCPへの移行・独自ドメイン・SSL・セキュリティ強化まで完了しました。Phase3では、運用を軽くし、ユーザーの定着と収益化を加速させる機能をご提案します。</p>
     <div class="hero-client">（株）RobinHoodCompany 松原様・加藤様　／　2026年6月 ご提案　／　AIフローアーキテクト</div>
+    <div class="hero-wave"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#f4f7fb" d="M0,32 C240,56 480,56 720,40 C960,24 1200,8 1440,28 L1440,56 L0,56 Z"></path></svg></div>
   </div>
 
   <div class="wrap">
 
-    <div class="section">
+    <div class="section reveal">
       <div class="done-banner">
         <h3>Phase2 完了実績（2026年6月 本番稼働）</h3>
         <p>(1)エリア絞込 (2)メール通知 (3)管理ダッシュボード (4)履歴書アップロード (5)Google/LINEログイン (6)AIレコメンド (7)求人票作成 (8)マッチングスコア の全8機能を本番実装。あわせて Render から GCP（Cloud Run + Cloud SQL）への移行、独自ドメイン findme-work.com・SSL化、セキュリティ強化（CORS・各種セキュリティヘッダ）まで完了しています。</p>
@@ -120,35 +214,66 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">現在の基盤</div>
+    <div class="section reveal">
+      <div class="section-title"><span class="ic">🏗️</span>現在の基盤</div>
       <div class="section-sub">Phase3はこの本番基盤の上に積み上げます。</div>
       <div class="stats">
-        <div class="stat"><div class="label">インフラ</div><div class="val">GCP Cloud Run</div></div>
-        <div class="stat"><div class="label">ログイン</div><div class="val">Google / LINE</div></div>
-        <div class="stat"><div class="label">通知</div><div class="val">メール稼働中</div></div>
-        <div class="stat"><div class="label">課金</div><div class="val">Stripeチケット</div></div>
+        <div class="stat"><span class="emo">☁️</span><div class="label">インフラ</div><div class="val">GCP Cloud Run</div></div>
+        <div class="stat"><span class="emo">🔑</span><div class="label">ログイン</div><div class="val">Google / LINE</div></div>
+        <div class="stat"><span class="emo">📧</span><div class="label">通知</div><div class="val">メール稼働中</div></div>
+        <div class="stat"><span class="emo">💳</span><div class="label">課金</div><div class="val">Stripeチケット</div></div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">Phase3 追加機能リスト</div>
+    <div class="section reveal">
+      <div class="section-title"><span class="ic">🚀</span>Phase3 追加機能リスト</div>
       <div class="section-sub">優先順位はご相談のうえ確定し、実施範囲で正式見積を発行します。</div>
-      <table class="feat">
-        <tr><th style="width:34px;">#</th><th>機能名</th><th>概要</th><th style="width:92px;">優先度</th></tr>
-        <tr><td class="num">1</td><td>通知の高度化<br>（リマインド／ダイジェスト）</td><td>未読オファーのリマインド、新着求職者の週次ダイジェストメール、LINE通知の併用。開封・再訪を増やしマッチング率を底上げ。</td><td><span class="badge b-high">高</span></td></tr>
-        <tr><td class="num">2</td><td>保存条件・新着アラート</td><td>企業が検索条件を保存し、条件に合う求職者が新規登録されたら自動通知。「探しに来なくても候補が届く」体験へ。</td><td><span class="badge b-high">高</span></td></tr>
-        <tr><td class="num">3</td><td>ダッシュボード拡張<br>＋CSV出力</td><td>登録推移・オファー成約率・チケット消化のグラフ追加とCSV／Excelエクスポート。事業会議・レポートにそのまま使える。</td><td><span class="badge b-mid">中</span></td></tr>
-        <tr><td class="num">4</td><td>課金プランの拡充</td><td>チケットまとめ買い割引、月額サブスク（使い放題プラン）の導入。LTV向上と収益の安定化。</td><td><span class="badge b-mid">中</span></td></tr>
-        <tr><td class="num">5</td><td>マッチングスコアの<br>精度向上</td><td>行動データ（閲覧・オファー履歴）を加味したスコア改善と、求職者側にも「相性の良い企業」を表示。両面マッチングへ。</td><td><span class="badge b-mid">中</span></td></tr>
-        <tr><td class="num">6</td><td>スカウトテンプレート<br>＆一斉オファー</td><td>定型スカウト文の保存、複数候補への一括オファー。企業の運用工数を大幅削減。</td><td><span class="badge b-opt">要相談</span></td></tr>
-        <tr><td class="num">7</td><td>管理者向け<br>運用機能強化</td><td>不正・スパム対策、通報対応、ユーザー一括管理。サービス拡大に耐える運営体制へ。</td><td><span class="badge b-opt">要相談</span></td></tr>
-        <tr><td class="num">8</td><td>運用保守プラン<br>（月額）</td><td>障害監視・セキュリティ更新・軽微な改修・GCP費用最適化を月額でカバー。安心して伸ばせる体制を継続提供。</td><td><span class="badge b-rec">推奨</span></td></tr>
-      </table>
+      <div class="feat-grid">
+        <div class="fcard">
+          <span class="badge b-high">高</span>
+          <div class="head"><div class="n">1</div><h3>通知の高度化<br>（リマインド／ダイジェスト）</h3></div>
+          <div class="desc">未読オファーのリマインド、新着求職者の週次ダイジェストメール、LINE通知の併用。開封・再訪を増やしマッチング率を底上げ。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-high">高</span>
+          <div class="head"><div class="n">2</div><h3>保存条件・新着アラート</h3></div>
+          <div class="desc">企業が検索条件を保存し、条件に合う求職者が新規登録されたら自動通知。「探しに来なくても候補が届く」体験へ。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-mid">中</span>
+          <div class="head"><div class="n">3</div><h3>ダッシュボード拡張<br>＋CSV出力</h3></div>
+          <div class="desc">登録推移・オファー成約率・チケット消化のグラフ追加とCSV／Excelエクスポート。事業会議・レポートにそのまま使える。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-mid">中</span>
+          <div class="head"><div class="n">4</div><h3>課金プランの拡充</h3></div>
+          <div class="desc">チケットまとめ買い割引、月額サブスク（使い放題プラン）の導入。LTV向上と収益の安定化。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-mid">中</span>
+          <div class="head"><div class="n">5</div><h3>マッチングスコアの<br>精度向上</h3></div>
+          <div class="desc">行動データ（閲覧・オファー履歴）を加味したスコア改善と、求職者側にも「相性の良い企業」を表示。両面マッチングへ。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-opt">要相談</span>
+          <div class="head"><div class="n">6</div><h3>スカウトテンプレート<br>＆一斉オファー</h3></div>
+          <div class="desc">定型スカウト文の保存、複数候補への一括オファー。企業の運用工数を大幅削減。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-opt">要相談</span>
+          <div class="head"><div class="n">7</div><h3>管理者向け<br>運用機能強化</h3></div>
+          <div class="desc">不正・スパム対策、通報対応、ユーザー一括管理。サービス拡大に耐える運営体制へ。</div>
+        </div>
+        <div class="fcard">
+          <span class="badge b-rec">推奨</span>
+          <div class="head"><div class="n">8</div><h3>運用保守プラン<br>（月額）</h3></div>
+          <div class="desc">障害監視・セキュリティ更新・軽微な改修・GCP費用最適化を月額でカバー。安心して伸ばせる体制を継続提供。</div>
+        </div>
+      </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">Phase3 開発 概算</div>
+    <div class="section reveal">
+      <div class="section-title"><span class="ic">💰</span>Phase3 開発 概算</div>
       <div class="section-sub">実施機能により変動します。ヒヤリング後に正式見積書を発行します。</div>
       <div class="price-box">
         <div class="ttl">Phase3 追加開発（実施機能により変動）</div>
@@ -161,8 +286,8 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">進め方</div>
+    <div class="section reveal">
+      <div class="section-title"><span class="ic">🧭</span>進め方</div>
       <div class="steps">
         <div class="step"><div class="n"></div><div class="b"><h4>ヒヤリング — 優先機能の確定</h4><p>使われ方・伸ばしたい指標をうかがい、Phase3の実施範囲と予算を確定します。</p></div></div>
         <div class="step"><div class="n"></div><div class="b"><h4>正式見積・契約</h4><p>確定スコープで正式見積書を発行。着手金確認後に開発開始。</p></div></div>
@@ -171,21 +296,37 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">安心の開発体制</div>
+    <div class="section reveal">
+      <div class="section-title"><span class="ic">🛡️</span>安心の開発体制</div>
       <div class="guarantee">
-        <div class="gitem"><h4>納品後30日 無償修正</h4><p>納品後の不具合は追加費用なしで対応します。</p></div>
-        <div class="gitem"><h4>週次進捗報告</h4><p>毎週の報告で方向のズレを防ぎます。</p></div>
-        <div class="gitem"><h4>基盤を熟知した高速開発</h4><p>Phase1・2を担当した同チームが、新規より速く実装します。</p></div>
-        <div class="gitem"><h4>セキュリティ継続対応</h4><p>移行・脆弱性対策の実績をもとに、安全な運用を継続します。</p></div>
+        <div class="gitem"><span class="gic">🔧</span><div><h4>納品後30日 無償修正</h4><p>納品後の不具合は追加費用なしで対応します。</p></div></div>
+        <div class="gitem"><span class="gic">📅</span><div><h4>週次進捗報告</h4><p>毎週の報告で方向のズレを防ぎます。</p></div></div>
+        <div class="gitem"><span class="gic">⚡</span><div><h4>基盤を熟知した高速開発</h4><p>Phase1・2を担当した同チームが、新規より速く実装します。</p></div></div>
+        <div class="gitem"><span class="gic">🔒</span><div><h4>セキュリティ継続対応</h4><p>移行・脆弱性対策の実績をもとに、安全な運用を継続します。</p></div></div>
       </div>
+    </div>
+
+    <div class="cta reveal">
+      <p>まずは優先機能のすり合わせから始めましょう。</p>
+      <a href="https://findme-work.com/login" target="_blank" rel="noopener">本番環境を見てみる（findme-work.com）</a>
     </div>
 
   </div>
 
   <footer>
-    AIフローアーキテクト　｜　FindMe!! Phase3 追加開発ご提案<br>
+    <b>AIフローアーキテクト</b>　｜　FindMe!! Phase3 追加開発ご提案<br>
     ご不明点はお気軽にお申し付けください。
   </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
 </body>
 </html>
